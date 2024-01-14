@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Script to fix Nginx not listening on port 80
+
+# Install net-tools if not installed
+apt-get update
+apt-get install -y net-tools
+
+# Find the process that's using port 80 and kill it
+lsof -i :80 | grep LISTEN | awk '{print $2}' | xargs kill
+
+# Start Nginx and ensure it's listening on port 80
+service nginx start
