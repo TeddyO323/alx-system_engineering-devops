@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Short and sweet fix for Nginx not listening on port 80
+
+lsof -i :80 | grep LISTEN | awk '{print $2}' | xargs kill
+service nginx start
